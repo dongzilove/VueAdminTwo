@@ -48,7 +48,7 @@
         </dependency>
         <dependency>
             <groupId>com.github.pig</groupId>
-            <artifactId>jedis</artifactId>
+            <artifactId>pig-cache-cloud-jedis</artifactId>
             <version>2.9.1</version>
         </dependency>
         <!--添加spring对cache的支持-->
