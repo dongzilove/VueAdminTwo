@@ -5,15 +5,15 @@ spring:
   application:
     name: pig-config-server
   profiles:
-    active: dev
+    active: native
   cloud:
     config:
       server:
-        git:
-          uri: https://gitee.com/cqzqxq_lxh/pig-config.git
+        native:
+          search-locations: classpath:/config/
 ---
 spring:
-  profiles: dev
+  profiles: native
 eureka:
   instance:
     prefer-ip-address: true

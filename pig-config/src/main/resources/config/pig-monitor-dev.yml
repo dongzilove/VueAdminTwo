@@ -1,0 +1,30 @@
+server:
+  port: 5001
+
+spring:
+  rabbitmq:
+    host: 106.14.69.75
+    port: 5682
+    username: pig
+    password: ENC(gc16brBHPNq27HsjaULgKGq00Rz6ZUji)
+  # zipkin:
+  #     base-url: http://localhost:5002
+  # sleuth:
+  #   enabled: true
+  #   sampler:
+  #     percentage: 1
+  boot:
+    admin:
+      turbine:
+        location: pig-monitor
+      routes:
+        endpoints: env,metrics,trace,dump,jolokia,info,configprops,trace,logfile,refresh,flyway,liquibase,heapdump,loggers,auditevents,hystrix.stream,turbine.stream
+
+turbine:
+    app-config: pig-gateway #收集监控信息的服务名
+    combine-host-port: true
+    cluster-name-expression: new String('default') #集群名称
+
+mobiles:
+  users:
+    - 17034642119

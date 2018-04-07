@@ -1,0 +1,75 @@
+server:
+  port: 4000
+#Redis cache 过期时间设置
+redis:
+  cache:
+    expiration: 3600
+
+# datasoure默认使用JDBC
+spring:
+  rabbitmq:
+    host: 106.14.69.75
+    port: 5682
+    username: pig
+    password: lengleng
+  zipkin:
+    rabbitmq:
+      queue: zipkin
+  sleuth:
+    sampler:
+      percentage: 1.0
+
+# 分库分表支持
+sharding:
+  jdbc:
+    datasource:
+      names: ds
+      ds:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.jdbc.Driver
+        username: root
+        password: lengleng
+        jdbc-url: jdbc:mysql://106.14.69.75:3309/pig?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false
+    config:
+      sharding:
+        tables:
+          sys_log:
+            actual-data-nodes: ds.sys_log_${0..1}
+            table-strategy:
+              inline:
+                sharding-column: id
+                algorithm-expression: sys_log_${id % 2}
+            key-generator-column-name: id
+            
+#mybaits-plus配置，修改主键类型，mapper.xml、type 别名等
+mybatis-plus:
+  mapper-locations: classpath:/mapper/*Mapper.xml
+  typeAliasesPackage: com.github.pig.admin.model.entity
+  global-config:
+    #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+    id-type: 0
+    #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+    field-strategy: 1
+    #驼峰下划线转换
+    db-column-underline: true
+    #刷新mapper 调试神器
+    refresh-mapper: true
+    #数据库大写下划线转换
+    #capital-mode: true
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+fdfs:
+  file-host: http://123.206.94.20:9999/
+  tracker-list:
+    - 123.206.94.20:22122
+    
+qiniu:
+  accessKey: hM2cBDEM0FTYzpXbigRW90kV12NhhzhFM3jCzurJ
+  secretKey: ENC(HM/K0KmtFoZSBhGDEA0Ez71ePTncZlQ954DfLNMZuOftKZq+2WR+dCXH9QEsf768q9wwd92RXLE=)
+  bucket: pigcloud
+  qiniuHost: http://p0hpm86wj.bkt.clouddn.com/
+    
+logging:
+  config: classpath:logback.xml
+

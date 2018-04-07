@@ -1,0 +1,47 @@
+server:
+  port: 3000
+  
+# datasoure默认使用JDBC
+spring:
+  freemarker:
+    allow-request-override: false
+    allow-session-override: false
+    cache: true
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    enabled: true
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: true
+    prefer-file-system-access: true
+    suffix: .ftl
+    template-loader-path: classpath:/templates/
+      
+pig:
+  auth:
+    clientId: ENC(Ho5VxMWMMIzfIEE8/WxVzA==)
+    clientSecret: ENC(Ho5VxMWMMIzfIEE8/WxVzA==)
+    scope: server
+  social:
+    qq:
+      providerId: qq
+      clientId: ENC(jYTHlVSN8p2C3KrLz40H7JJYZcQs3SAK)
+      clientSecret: ENC(DmTyBXeNFG7Z6pooPCtDUMcI1MYTiO3ldaEOuVWmOTpgDVmyGMsI42hz6OM+0pEE)
+
+urls:
+  anon:
+    - /authentication/**
+    - /**/*.css
+    - /social
+    - /signin
+    - /signup
+    - /info
+    - /health
+    - /metrics/**
+    - /loggers/**
+    - /mobile/token
+
+logging:
+  config: classpath:logback.xml
+
