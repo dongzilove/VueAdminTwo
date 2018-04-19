@@ -11,6 +11,7 @@ spring:
       server:
         native:
           search-locations: classpath:/config/
+      fail-fast: true
 ---
 spring:
   profiles: native
@@ -27,6 +28,13 @@ eureka:
 ---
 spring:
   profiles: prd
+  cloud:
+    config:
+      retry:
+        initial-interval: 3000
+        multiplier: 1.5
+        max-interval: 20000
+        max-attempts: 6
 eureka:
   instance:
     prefer-ip-address: true
